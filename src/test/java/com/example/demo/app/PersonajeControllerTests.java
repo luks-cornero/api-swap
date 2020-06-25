@@ -15,10 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.example.demo.app.controller.PersonajeController;
 import com.example.demo.app.model.Personaje;
 import com.example.demo.app.utils.ConstanteTest;
-/*
-@RunWith(SpringRunner.class)
-@SpringBootTest
-*/
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class PersonajeControllerTests {
