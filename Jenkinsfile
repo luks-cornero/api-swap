@@ -8,6 +8,6 @@ node{
     }
     
     stage('Hook de Pipeline jenkis'){
-        bat "echo SI FUNCO LPM"
+        bat "echo SI FUNCO LPM."
     }
 }
