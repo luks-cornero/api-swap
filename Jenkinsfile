@@ -6,4 +6,8 @@ node{
     stage('Hook de jenkis'){
         bat "echo hook"
     }
+    
+    stage('Hook de Pipeline jenkis'){
+        bat "echo Pipeline"
+    }
 }
