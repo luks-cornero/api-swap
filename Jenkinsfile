@@ -28,7 +28,7 @@ node{
         bat 'mvn install -Dmaven.test.skip=true'
    }
 
-    stage('Archivar'){
+    stage('Archiva'){
         bat "echo Vamos a archivar el jar"
         step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
    }
