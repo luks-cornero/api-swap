@@ -20,7 +20,7 @@ public class PersonajeServiceImpl implements PersonajeService {
 		Personaje personaje = new Personaje();
 		
 		try {
-			personaje = restTemplate.getForObject(Constante.URL_PERSONAJE + id + "/", Personaje.class);		
+			personaje = restTemplate.getForObject(Constante.URL_PERSONAJE + (id+1) + "/", Personaje.class);		
 		
 		} catch (Exception e) {
 			this.log.error("ERROR AL CONSULTAR LA API");
