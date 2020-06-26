@@ -21,6 +21,7 @@ node{
    }
 
    stage('Archivar'){
+       bat "echo archivo el jar"
     step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
    }
 
