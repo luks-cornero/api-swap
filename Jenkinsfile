@@ -1,29 +1,45 @@
 node{
+
     stage('Compilacion'){
-        checkout scm
+
+        bat "echo Hacemos la compilacion"
+
         bat 'mvn clean compile'
     }
     
     stage('Test'){
        try{
-        bat 'mvn verify'
-        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            bat "echo Ejecutamos los tests"
+
+            bat 'mvn verify'
+
+            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+
        }catch(err) {
-        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-        if (currentBuild.result == 'UNSTABLE')
-         currentBuild.result = 'FAILURE'
-        throw err
+            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+ /*
+    currentBuild: Hace referencia a la compilación actualmente en ejecución. 
+    currentBuild.result: normalmente SUCCESS, UNSTABLE o FAILURE ( puede ser nulo para una compilación en curso)
+*/
+            if (currentBuild.result == 'UNSTABLE')
+                currentBuild.result = 'FAILURE'
+            
+            throw err
         }
     }
 
-   stage('Instalar'){
-    bat 'mvn install -Dmaven.test.skip=true'
+    stage('Instalacion'){
+        
+        bat "echo Hacemos la instalacion"
+
+        bat 'mvn install -Dmaven.test.skip=true'
    }
 
-   stage('Archivar'){
-       bat "echo archivo el jar"
-    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
+    stage('Archivar'){
+        
+        bat "echo Archivamos el jar"
+        
+        step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
    }
-
-    
+   
 }
