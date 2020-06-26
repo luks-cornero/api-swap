@@ -1,19 +1,13 @@
 node{
-
     stage('Compilacion'){
-
-        bat "echo Hacemos la compilacion"
-
+        checkout scm
         bat 'mvn clean compile'
     }
     
     stage('Test'){
        try{
-            bat "echo Ejecutamos los tests"
 
             bat 'mvn verify'
-
-            // Guardo los resultados de los test
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
        }catch(err) {
@@ -29,18 +23,15 @@ node{
         }
     }
 
-    stage('Instalacion'){
-        
-        bat "echo Hacemos la instalacion"
-
+    stage('Instalar'){
+        bat "echo Estamos haciendo la instalacion"
         bat 'mvn install -Dmaven.test.skip=true'
    }
 
     stage('Archivar'){
-        
-        bat "echo Archivamos el jar"
-        
+        bat "echo Vamos a archivar el jar"
         step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
    }
-   
+
+    
 }
