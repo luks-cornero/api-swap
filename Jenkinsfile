@@ -15,5 +15,14 @@ node{
         throw err
         }
     }
+
+   stage('Instalar'){
+    bat 'mvn install -Dmaven.test.skip=true'
+   }
+
+   stage('Archivar'){
+    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar, **/target/*.war', fingerprint: true])
+   }
+
     
 }
