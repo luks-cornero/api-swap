@@ -23,7 +23,7 @@ node{
         }
     }
 
-    stage('Instalar'){
+    stage('Instalacion'){
         bat "echo Estamos haciendo la instalacion"
         bat 'mvn install -Dmaven.test.skip=true'
    }
