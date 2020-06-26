@@ -13,6 +13,7 @@ node{
 
             bat 'mvn verify'
 
+            //Guardo los resultados de los test
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
        }catch(err) {
